@@ -86,7 +86,7 @@ public class Menu {
                 Menu.MenuNotas(gestorn, gestora, gestasig);
                 break;
             case 2:
-                Menu.MenuGestionAlumno(gestorn, gestora, gestasig);
+                Menu.MenuGestionAlumno(gestorn, gestora);
                 break;
 
             default:
@@ -96,47 +96,11 @@ public class Menu {
 
     }
 
-    public static void MenuGestionAlumno(GestionNotas gestorn, GestionAlumno gestora, GestionAsignaturas gestasig) {
+    public static void MenuModificarAlumno(GestionNotas gestorn, GestionAlumno gestora, GestionAsignaturas gasig) {
         Scanner lector = new Scanner(System.in);
-        System.out.println("Que deseas hacer: ");
-        System.out.println("1: Dar de alta a un alumno ");
-        System.out.println("2: Dar de baja a un alumno ");
-        System.out.println("3: Modificar un alumno ");
-        int op = lector.nextInt();
-
-        switch (op) {
-            case 1:
-                System.out.println("Introduce el dni del nuevo alumno");
-                String dni = lector.next();
-                System.out.println("Intoduce el nombre");
-                String nombre = lector.next();
-                System.out.println("Introduce el apellido");
-                String apellido = lector.next();
-                System.out.println("Introduce la contraseña");
-                String contraseña = lector.next();
-                Alumno alumno = new Alumno(nombre, apellido, dni, contraseña);
-
-                gestora.AñadirAlumno(alumno);
-                System.out.println("ALumno creado");
-            case 2:
-                System.out.println("Introduce el dni del alumno que desea dar de baja");
-                String dnialumno = lector.next();
-                gestora.BorrarAlumno(gestora.BuscarPorDni(dnialumno));
-                System.out.println("Alumno borrado");
-                break;
-            case 3:
-                
-
-        }
-
-    }
-    
-    public static void MenuModificarAlumno(GestionNotas gestorn, GestionAlumno gestora, GestionAsignaturas gasig){
-    Scanner lector = new Scanner(System.in);
         System.out.println("Introduce el dni del alumno que desea modificar");
         String dni = lector.next();
-        
-    
+
     }
 
     public static void MenuNotas(GestionNotas gestorn, GestionAlumno gestora, GestionAsignaturas gasig) {
@@ -269,10 +233,46 @@ public class Menu {
                 System.out.println("Alumno borrado");
                 break;
             case 3:
-                System.out.println("");
+                Menu.MenuModificarAlumno(gestorn, gestora);
+                break;
             default:
                 System.out.println("Opción no válida");
 
         }
     }
+
+    public static void MenuModificarAlumno(GestionNotas gestorn, GestionAlumno gestora) {
+        Scanner lector = new Scanner(System.in);
+
+        System.out.println("Indica el dni del alumno que desa modificar");
+        Alumno alaux = gestora.BuscarPorDni(lector.next());
+        System.out.println("¿Qué desa modificar?");
+        System.out.println("1: Nombre");
+        System.out.println("2: Apellido");
+        System.out.println("3: Dni");
+        System.out.println("4: Contraseña");
+        int op = lector.nextInt();
+
+        switch (op) {
+            case 1:
+                System.out.println("Introduce el nuevo nombre");
+                gestora.BuscarPorDni(lector.next()).setNombre(lector.next());
+                break;
+            case 2:
+                System.out.println("Introduce el nuevo apellido");
+                alaux.setApellido(lector.next());
+                break;
+            case 3:
+                System.out.println("Introduce el nuevo dni");
+                alaux.setDni(lector.next());
+                break;
+            case 4:
+                System.out.println("Introduce la nueva contraseña");
+                alaux.setNombre(lector.next());
+                break;
+            default:
+                System.out.println("Opción no válida");
+        }
+    }
+
 }
